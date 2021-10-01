@@ -1,0 +1,10 @@
+# Ignore artifacts:
+node_modules/
+build/
+coverage/
+vite.config.ts
+jest.config.js
+/dist
+*.scss
+*.css
+/.next
