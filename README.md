@@ -38,3 +38,7 @@ This app uses uses a lot of fun things. Take a look at the `package.json`
 - There is FOUC when loading the page. Figure out a way to avoid having the user see unstyled content.
 - Right now the performance on this page is fine, although it could get crazy as we get more Pokemon. Consider adding a feature to allow for the expansion of this page.
 - There are way too many calls to the API happening here. Try to offload some of the work to our service worker API.
+
+## When you're done.
+
+Make a PR request to this repo with your submission!

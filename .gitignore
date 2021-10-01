@@ -6,6 +6,9 @@ dist
 dist-ssr
 /build
 
+# vscode
+.vscode
+
 # misc
 .DS_Store
 *.local
