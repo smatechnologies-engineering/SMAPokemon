@@ -72,6 +72,9 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
 
   useEffect(() => {
     ;(async function getText() {
+      if (!flavorTextUrl) {
+        return;
+      }
       const response = await fetch(flavorTextUrl)
       const data = await response.json()
 
