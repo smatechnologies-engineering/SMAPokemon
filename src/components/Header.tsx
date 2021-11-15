@@ -67,5 +67,3 @@ export const Header: FC<IProps> = ({ className }) => {
     </header>
   )
 }
-
-export default Header
