@@ -1,5 +1,11 @@
-import { useEffect, useState } from 'react'
+import { FC } from 'react'
+import { PokemonInfoCard } from './PokemonInfoCard'
+import { Pokemon } from 'pokenode-ts'
 
-export function PokemonCard(props: $FixMe) {
-  return <div>Create this component</div>
+interface IProps {
+  pokemon?: Pokemon
+}
+
+export const PokemonCard: FC<IProps> = ({ pokemon }) => {
+  return pokemon ? <PokemonInfoCard pokemon={pokemon} /> : null
 }

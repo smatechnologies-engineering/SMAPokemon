@@ -1,9 +1,12 @@
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render } from '@testing-library/react'
 import App from './App'
 
-test('it renders learn react link', () => {
-  render(<App />)
-  const linkElement = screen.getByText(/Find your Pokemon/i)
-  expect(linkElement).toBeInTheDocument()
+describe('<App />', () => {
+  it('renders without exceptions', async () => {
+    // arrange, act
+    const appRender = () => render(<App />)
+
+    // assert
+    expect(appRender).not.toThrow()
+  })
 })

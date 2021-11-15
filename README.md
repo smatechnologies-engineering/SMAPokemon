@@ -6,7 +6,7 @@ Recommended time: 1-3 hours.
 
 There are a lot of things to do in this app. Below are some user stories you can choose from, or you can choose to find your own. There are easter eggs everywhere.
 
-This app uses uses a lot of fun things. Take a look at the `package.json`
+This app uses a lot of fun things. Take a look at the `package.json`
 
 ---
 

@@ -1,34 +1,20 @@
-import { useEffect, useState } from 'react'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-import Container from '@mui/material/Container'
-import { PokemonInfoCard } from '../components/PokemonInfoCard'
+import { FC, useState } from 'react'
+import { Typography, Grid, Container, Box } from '@mui/material'
+import { PokemonCard } from '../components/Pokemon'
+import { PokemonSearchTextField } from '../components/PokemonSearchTextField'
+import { Pokemon as PokemonType } from 'pokenode-ts'
 
-export function PokemonSearch() {
-  const [val, setVal] = useState('')
-  const [pokemonFound, setPokemonFound] = useState(false)
-  const [pokemon, setPokemon] = useState()
-  const handleChange = (e: $FixMe) => {
-    setVal(e.target.value)
+export const PokemonSearch: FC = () => {
+  const [pokemon, setPokemon] = useState<PokemonType | undefined>(undefined)
+  const [isPokemonFound, setIsPokemonFound] = useState<boolean>(true)
+
+  const maybeRenderPokemonInfoCard = () => {
+    return isPokemonFound ? (
+      <PokemonCard pokemon={pokemon} />
+    ) : (
+      <Typography variant="h5">Pokemon Not Found</Typography>
+    )
   }
-
-  const url = `https://pokeapi.co/api/v2/pokemon/${val}/`
-
-  useEffect(() => {
-    ;(async () => {
-      try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${val}/`
-        )
-        const data = await response.json()
-        setPokemon(data)
-        setPokemonFound(true)
-      } catch (e) {
-        console.error(e)
-      }
-    })()
-  }, [val])
 
   return (
     <Container
@@ -39,19 +25,15 @@ export function PokemonSearch() {
         <Grid item xs={4} sm={4} md={4}>
           <Typography variant="h2">Find your Pokemon</Typography>
         </Grid>
-
-        {pokemonFound ? (
-          <Grid item xs={4} sm={4} md={4}>
-            <PokemonInfoCard pokemon={{ name: val, url }} />
-          </Grid>
-        ) : null}
+        <PokemonSearchTextField
+          debounceInterval={700}
+          setPokemon={setPokemon}
+          setIsPokemonFound={setIsPokemonFound}
+        />
         <Grid item xs={4} sm={4} md={4}>
-          <TextField
-            variant="outlined"
-            color="secondary"
-            label="search pokemon"
-            onChange={handleChange}
-          />
+          <Box display="flex" justifyContent="center">
+            {maybeRenderPokemonInfoCard()}
+          </Box>
         </Grid>
       </Grid>
     </Container>
