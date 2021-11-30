@@ -1,5 +1,5 @@
 .App {
-  /* text-align: center; */
+  text-align: center;
 }
 
 .App-header {
@@ -11,4 +11,16 @@
   justify-content: center;
   /* font-size: calc(10px + 2vmin); */
   /* color: white; */
+}
+.Logo {
+  margin: auto;
+  text-align: center;
+  max-width: 25%;
+  max-height: 50%;
+}
+.Logo-Horizontally-Center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
