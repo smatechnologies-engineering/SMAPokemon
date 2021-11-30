@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography'
 import Chip, { ChipProps } from '@mui/material/Chip'
 import * as colors from '@mui/material/colors'
 import { styled } from '@mui/material/styles'
+import Skeleton from '@mui/material/Skeleton'
 
 interface PokemonProp {
   name: string
@@ -85,13 +86,18 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
 
   return (
     <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
-      <CardMedia
-        component="img"
-        alt={name}
-        height="140"
-        style={{ objectFit: 'contain' }}
-        image={pokemon?.sprites?.other['official-artwork']['front_default']}
-      />
+      {pokemon?.sprites?.other['official-artwork']['front_default'] ? (
+        <CardMedia
+          component="img"
+          alt={name}
+          height="140"
+          style={{ objectFit: 'contain' }}
+          image={pokemon?.sprites?.other['official-artwork']['front_default']}
+        />
+      ) : (
+        <Skeleton sx={{ height: 140 }} animation="wave" variant="rectangular" />
+      )}
+
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {name.charAt(0).toUpperCase() + name.slice(1)}
