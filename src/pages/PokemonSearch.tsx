@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
@@ -7,28 +8,30 @@ import { PokemonInfoCard } from '../components/PokemonInfoCard'
 
 export function PokemonSearch() {
   const [val, setVal] = useState('')
+  const [searchVal, setsearchVal] = useState('')
+
   const [pokemonFound, setPokemonFound] = useState(false)
   const [pokemon, setPokemon] = useState()
-  const handleChange = (e: $FixMe) => {
-    setVal(e.target.value)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setsearchVal(e.target.value)
   }
-
-  const url = `https://pokeapi.co/api/v2/pokemon/${val}/`
-
-  useEffect(() => {
+  const search = () => {
     ;(async () => {
       try {
         const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${val}/`
+          `https://pokeapi.co/api/v2/pokemon/${searchVal}/`
         )
         const data = await response.json()
         setPokemon(data)
         setPokemonFound(true)
+        setVal(searchVal)
       } catch (e) {
         console.error(e)
       }
     })()
-  }, [val])
+  }
+
+  const url = `https://pokeapi.co/api/v2/pokemon/${val}/`
 
   return (
     <Container
@@ -39,12 +42,6 @@ export function PokemonSearch() {
         <Grid item xs={4} sm={4} md={4}>
           <Typography variant="h2">Find your Pokemon</Typography>
         </Grid>
-
-        {pokemonFound ? (
-          <Grid item xs={4} sm={4} md={4}>
-            <PokemonInfoCard pokemon={{ name: val, url }} />
-          </Grid>
-        ) : null}
         <Grid item xs={4} sm={4} md={4}>
           <TextField
             variant="outlined"
@@ -52,7 +49,15 @@ export function PokemonSearch() {
             label="search pokemon"
             onChange={handleChange}
           />
+          <Button variant="contained" size="large" onClick={search}>
+            Search
+          </Button>
         </Grid>
+        {pokemonFound ? (
+          <Grid item xs={4} sm={4} md={4}>
+            <PokemonInfoCard pokemon={{ name: val, url }} />
+          </Grid>
+        ) : null}
       </Grid>
     </Container>
   )
