@@ -14,7 +14,7 @@ interface PokemonProp {
   url: string
 }
 
-const obj: Record<string, $FixMe> = {
+const obj: Record<string, string> = {
   fire: colors.red[500],
   grass: colors.lime[500],
   electric: colors.yellow[500],
@@ -34,13 +34,13 @@ const obj: Record<string, $FixMe> = {
 }
 
 interface ColoredChipProps extends ChipProps {
-  eltype: $FixMe
+  eltype: string
 }
 
 const ColoredChip = styled(Chip, {
   shouldForwardProp: (prop) => prop !== 'eltype',
 })<ColoredChipProps>(({ eltype, theme }) => {
-  const color: $FixMe = obj[eltype] || obj.normal
+  const color: string = obj[eltype] || obj.normal
   return {
     color: theme.palette.getContrastText(color),
     backgroundColor: color,

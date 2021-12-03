@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react'
 
-export function PokemonCard(props: $FixMe) {
+interface PokemonCardProp {
+  name: string
+  url: string
+}
+export function PokemonCard(props: { pokemon: PokemonCardProp }) {
   return <div>Create this component</div>
 }

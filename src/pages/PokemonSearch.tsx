@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
@@ -47,10 +47,13 @@ export function PokemonSearch() {
             variant="outlined"
             color="secondary"
             label="search pokemon"
+            inputProps={{ 'data-testid': 'search-input' }}
             onChange={handleChange}
           />
+        </Grid>
+        <Grid item xs={4} sm={4} md={4}>
           <Button variant="contained" size="large" onClick={search}>
-            Search
+            Submit
           </Button>
         </Grid>
         {pokemonFound ? (
