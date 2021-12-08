@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
-import { PokemonInfoCard } from '../components/PokemonInfoCard'
+import { PokemonInfoCard } from '../components/Card/PokemonInfoCard'
 
 export function PokemonSearch() {
   const [val, setVal] = useState('')

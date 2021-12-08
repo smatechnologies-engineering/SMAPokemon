@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
-import { PokemonInfoCard } from '../components/PokemonInfoCard'
+import { PokemonInfoCard } from '../components/Card/PokemonInfoCard'
 
 interface Pokemon {
   name: string
