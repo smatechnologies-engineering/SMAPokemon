@@ -22,6 +22,7 @@ export function PokemonSearch() {
           `https://pokeapi.co/api/v2/pokemon/${val}/`
         )
         const data = await response.json()
+        console.log(data)
         setPokemon(data)
         setPokemonFound(true)
       } catch (e) {
