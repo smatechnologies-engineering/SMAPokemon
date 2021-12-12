@@ -8,7 +8,7 @@ import { PokemonInfoCard } from '../components/Card/PokemonInfoCard'
 export function PokemonSearch() {
   const [val, setVal] = useState('')
   const [pokemonFound, setPokemonFound] = useState(false)
-  const [pokemon, setPokemon] = useState()
+  const [pokemon, setPokemon] = useState(true)
   const handleChange = (e: $FixMe) => {
     setVal(e.target.value)
   }
@@ -18,15 +18,13 @@ export function PokemonSearch() {
   useEffect(() => {
     ;(async () => {
       try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${val}/`
-        )
+        const response = await fetch(url)
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
         setPokemon(data)
         setPokemonFound(true)
       } catch (e) {
-        console.error(e)
+        // console.error(e)
       }
     })()
   }, [val])
