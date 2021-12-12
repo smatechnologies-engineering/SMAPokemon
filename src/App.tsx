@@ -4,18 +4,20 @@ import { Pokedex } from './pages/Pokedex'
 import { PokemonSearch } from './pages/PokemonSearch'
 import { BrowserRouter, Router, Route, Link, Switch } from 'react-router-dom'
 import logo from './components/Logo/Pokemon-Logo.png'
+import Navbar from './components/Navbar'
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <header className="App-header">
+          <img src={logo} alt="Logo" className="logo" />
+          <Navbar />
           <Switch>
             <Route path="/pokedex">
               <Pokedex />
             </Route>
             <Route exact path="/">
-              <img src={logo} alt="Logo" />
               <PokemonSearch />
             </Route>
             <Route path="/:pokemon">{/* <PokemonCard /> */}</Route>
