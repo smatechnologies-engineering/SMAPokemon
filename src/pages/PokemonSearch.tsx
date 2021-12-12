@@ -42,7 +42,13 @@ export function PokemonSearch() {
         </Grid>
 
         {pokemonFound ? (
-          <Grid item xs={4} sm={4} md={4}>
+          <Grid
+            item
+            xs={4}
+            sm={4}
+            md={4}
+            style={{ display: 'flex', justifyContent: 'center' }}
+          >
             <PokemonInfoCard pokemon={{ name: val, url }} />
           </Grid>
         ) : null}
