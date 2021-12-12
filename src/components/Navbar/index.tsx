@@ -9,7 +9,7 @@ function Navbar() {
       <ul>
         <li>
           <Link className="navbar-brand" to="/">
-            Main
+            Home
           </Link>
         </li>
         <li>
