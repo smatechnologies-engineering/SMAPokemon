@@ -3,7 +3,7 @@ import './App.css'
 import { Pokedex } from './pages/Pokedex'
 import { PokemonSearch } from './pages/PokemonSearch'
 import Main from './pages/Main'
-import { BrowserRouter, Router, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import logo from './components/Logo/Pokemon-Logo.png'
 import Navbar from './components/Navbar'
 

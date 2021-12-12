@@ -22,7 +22,6 @@ function Navbar() {
             Pokedex
           </Link>
         </li>
-
       </ul>
     </nav>
   )
