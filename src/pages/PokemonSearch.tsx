@@ -52,7 +52,7 @@ export function PokemonSearch() {
             <PokemonInfoCard pokemon={{ name: val, url }} />
           </Grid>
         ) : null}
-        <Grid item xs={4} sm={4} md={4} mb={37}>
+        <Grid item xs={4} sm={4} md={4} mb={52}>
           <TextField
             variant="outlined"
             color="secondary"
