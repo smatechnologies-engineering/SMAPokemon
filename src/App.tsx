@@ -1,7 +1,8 @@
-import React, { ChangeEvent, useState, useEffect } from 'react'
+import React from 'react'
 import './App.css'
 import { Pokedex } from './pages/Pokedex'
 import { PokemonSearch } from './pages/PokemonSearch'
+import Main from './pages/Main'
 import { BrowserRouter, Router, Route, Link, Switch } from 'react-router-dom'
 import logo from './components/Logo/Pokemon-Logo.png'
 import Navbar from './components/Navbar'
@@ -14,10 +15,11 @@ function App() {
           <img src={logo} alt="Logo" className="logo" />
           <Navbar />
           <Switch>
+            <Route exact path="/" component={Main} />
             <Route path="/pokedex">
               <Pokedex />
             </Route>
-            <Route exact path="/">
+            <Route exact path="/pokemonSearch">
               <PokemonSearch />
             </Route>
             <Route path="/:pokemon">{/* <PokemonCard /> */}</Route>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import { PokemonInfoCard } from '../components/Card/PokemonInfoCard'
+import { PokemonSearch } from './PokemonSearch'
 
 interface Pokemon {
   name: string
@@ -20,6 +21,7 @@ export function Pokedex() {
   }, [])
   return (
     <Container style={{ paddingBottom: 24, paddingTop: 24 }} maxWidth={'lg'}>
+      <PokemonSearch />
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}

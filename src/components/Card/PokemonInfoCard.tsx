@@ -47,7 +47,7 @@ const ColoredChip = styled(Chip, {
 })
 
 interface Pokemon {
-  types: Type
+  types: $FixMe
   sprites: $FixMe
   species: $FixMe
 }
@@ -76,7 +76,9 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
       const data = await response.json()
 
       setDetails(
-        data['flavor_text_entries'].find((t: Type) => t.language.name === 'en')
+        data['flavor_text_entries'].find(
+          (t: $FixMe) => t.language.name === 'en'
+        )
       )
     })()
   }, [flavorTextUrl])
@@ -99,7 +101,7 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
         </Typography>
       </CardContent>
       <CardActions>
-        {pokemon?.types?.map((t: Type) => (
+        {pokemon?.types?.map((t: $FixMe) => (
           <ColoredChip
             label={t.type.name}
             key={t.type.name}
