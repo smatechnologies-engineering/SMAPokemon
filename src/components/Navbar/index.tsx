@@ -13,14 +13,10 @@ function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/pokemonSearch" className="nav-link tm-nav-link">
-            Search
-          </Link>
+          <Link to="/pokemonSearch">Search</Link>
         </li>
         <li>
-          <Link to="/pokedex" className="nav-link tm-nav-link">
-            Pokedex
-          </Link>
+          <Link to="/pokedex">Pokedex</Link>
         </li>
       </ul>
     </nav>
