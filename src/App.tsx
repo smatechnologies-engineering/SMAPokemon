@@ -16,7 +16,7 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Main} />
-            <Route path="/pokedex">
+            <Route exact path="/pokedex">
               <Pokedex />
             </Route>
             <Route exact path="/pokemonSearch">

@@ -8,9 +8,7 @@ function Navbar() {
     <nav>
       <ul>
         <li>
-          <Link className="navbar-brand" to="/">
-            Home
-          </Link>
+          <Link to="/">Home</Link>
         </li>
         <li>
           <Link to="/pokemonSearch">Search</Link>
