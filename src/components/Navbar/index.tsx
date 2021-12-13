@@ -11,10 +11,10 @@ function Navbar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/pokemonSearch">Search</Link>
+          <Link to="/pokedex">Pokedex</Link>
         </li>
         <li>
-          <Link to="/pokedex">Pokedex</Link>
+          <Link to="/pokemonSearch">Search</Link>
         </li>
       </ul>
     </nav>
