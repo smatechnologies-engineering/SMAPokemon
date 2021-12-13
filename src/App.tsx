@@ -16,12 +16,12 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Main} />
-            <Route exact path="/pokedex">
-              <Pokedex />
-            </Route>
-            <Route exact path="/pokemonSearch">
-              <PokemonSearch />
-            </Route>
+            <Route exact path="/pokedex" component={Pokedex}></Route>
+            <Route
+              exact
+              path="/pokemonSearch"
+              component={PokemonSearch}
+            ></Route>
             <Route path="/:pokemon">{/* <PokemonCard /> */}</Route>
           </Switch>
         </header>
