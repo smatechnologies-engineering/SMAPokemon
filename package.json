@@ -24,8 +24,6 @@
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.1",
     "@mui/material": "^5.0.2",
-    "@types/lodash.debounce": "^4.0.6",
-    "lodash.debounce": "^4.0.8",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-infinite-scroll-component": "^6.1.0",
