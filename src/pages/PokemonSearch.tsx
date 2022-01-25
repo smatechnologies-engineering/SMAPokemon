@@ -21,7 +21,7 @@ export function PokemonSearch() {
     setVal(e.target.value)
   }
 
-  const handleSub = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (val) {
       try {
@@ -41,7 +41,7 @@ export function PokemonSearch() {
       style={{ paddingBottom: 24, paddingTop: 24, textAlign: 'center' }}
       maxWidth={'lg'}
     >
-      <form onSubmit={handleSub}>
+      <form onSubmit={handleSubmit}>
         <Grid
           container
           direction="column"
