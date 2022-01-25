@@ -23,6 +23,11 @@
   transition: all 0.2s !important;
 }
 
+.pokemon-logo {
+  height: 150px;
+  width: 300px;
+}
+
 .pokeball-animation {
   animation: shake 0.5s infinite alternate;
   height: 200px;
@@ -43,5 +48,12 @@
   }
   100% {
     transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 600px) {
+  .pokemon-logo {
+    width: 120px;
+    height: 60px;
   }
 }
