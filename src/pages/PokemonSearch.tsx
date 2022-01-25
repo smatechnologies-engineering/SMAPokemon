@@ -18,18 +18,20 @@ export function PokemonSearch() {
   const url = `https://pokeapi.co/api/v2/pokemon/${val}/`
 
   useEffect(() => {
-    ;(async () => {
-      setPokemon(null)
-      try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${val}/`
-        )
-        const data = await response.json()
-        setPokemon(data)
-      } catch (e) {
-        console.error(e)
-      }
-    })()
+    if (val) {
+      ;(async () => {
+        setPokemon(null)
+        try {
+          const response = await fetch(
+            `https://pokeapi.co/api/v2/pokemon/${val}/`
+          )
+          const data = await response.json()
+          setPokemon(data)
+        } catch (e) {
+          console.error(e)
+        }
+      })()
+    }
   }, [val])
 
   return (

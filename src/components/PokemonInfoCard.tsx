@@ -6,7 +6,6 @@ import CardMedia from '@mui/material/CardMedia'
 import Skeleton from '@mui/material/Skeleton'
 import Typography from '@mui/material/Typography'
 import Chip, { ChipProps } from '@mui/material/Chip'
-import { Link } from 'react-router-dom'
 import * as colors from '@mui/material/colors'
 import { styled } from '@mui/material/styles'
 import Modal from '@mui/material/Modal'
@@ -53,7 +52,7 @@ const ColoredChip = styled(Chip, {
 })
 
 interface Pokemon {
-  id: $FixMe
+  id: number
   types: $FixMe
   sprites: $FixMe
   species: $FixMe
@@ -104,7 +103,7 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
       console.log(data['flavor_text_entries'])
       setDetails(
         data['flavor_text_entries'].find(
-          (t: $FixMe) => t.language.name === 'en'
+          (t: Record<string, unknown>) => t.language.name === 'en'
         )
       )
     })()
