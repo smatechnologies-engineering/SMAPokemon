@@ -26,7 +26,7 @@ export function Pokedex() {
     const response = await fetch(nextApiCall)
     const data = await response.json()
     setNextApiCall(data.next)
-    setPokemon(pokemon.concat(data.results))
+    setPokemon((pokemon) => [...pokemon, ...data.results])
   }
 
   return (
