@@ -26,6 +26,7 @@ const Nav = () => {
           }}
         >
           <Button
+            id="pokedex-link"
             component={Link}
             to={'/'}
             sx={{
@@ -39,6 +40,7 @@ const Nav = () => {
             Pokedex
           </Button>
           <Button
+            id="search-link"
             component={Link}
             to={'/search'}
             sx={{
