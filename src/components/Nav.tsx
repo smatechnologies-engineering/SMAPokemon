@@ -17,7 +17,7 @@ const Nav = () => {
           alignItems: 'center',
         }}
       >
-        <img src={logo} alt="pokemon-logo" height="150px" width="300px" />
+        <img className="pokemon-logo" src={logo} alt="pokemon-logo" />
         <Box
           style={{
             display: 'flex',
