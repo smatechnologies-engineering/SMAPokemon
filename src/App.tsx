@@ -1,26 +1,24 @@
-import { ChangeEvent, useState, useEffect } from 'react'
 import './App.css'
 import { Pokedex } from './pages/Pokedex'
 import { PokemonSearch } from './pages/PokemonSearch'
-import { BrowserRouter, Router, Route, Link, Switch } from 'react-router-dom'
+import Nav from './components/Nav'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <div className="App">
-        <header className="App-header">
-          <Switch>
-            <Route path="/pokedex">
-              <Pokedex />
-            </Route>
-            <Route exact path="/">
-              <PokemonSearch />
-            </Route>
-            <Route path="/:pokemon">{/* <PokemonCard /> */}</Route>
-          </Switch>
-        </header>
+        <Nav />
+        <Switch>
+          <Route exact path="/">
+            <Pokedex />
+          </Route>
+          <Route path="/search">
+            <PokemonSearch />
+          </Route>
+        </Switch>
       </div>
-    </BrowserRouter>
+    </Router>
   )
 }
 

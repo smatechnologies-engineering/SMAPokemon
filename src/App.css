@@ -12,3 +12,36 @@
   /* font-size: calc(10px + 2vmin); */
   /* color: white; */
 }
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 0px 14px 1px #999999;
+}
+
+.card {
+  cursor: pointer;
+  transition: all 0.2s !important;
+}
+
+.pokeball-animation {
+  animation: shake 0.5s infinite alternate;
+  height: 200px;
+  width: 200px;
+  display: block;
+  margin: 24px auto;
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(7deg);
+  }
+  25% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-7deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
