@@ -1,10 +1,12 @@
-describe('test search', () => {
-  before(() => {
+describe('test app', () => {
+
+  it('should load only 20 pokemon intially', () => {
     cy.visit('localhost:3001')
-    cy.get('#search-link').click()
+    cy.get('.MuiGrid-container').children().should('have.length', 20)
   })
 
   it('navigates to search correctly', () => {
+    cy.get('#search-link').click()
     cy.url().should('include', 'search')
   })
 
