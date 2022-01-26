@@ -4,6 +4,7 @@ describe('test search', () => {
     cy.get('#search-link').click()
     cy.url().should('include', 'search')
     cy.get('input').type('pikachu')
+    cy.get('form').submit()
     // app errors will crash this test, also .wait is flakey
     cy.wait(3000)
     cy.get('.MuiCard-root').should('exist')
