@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx lint
+npm test
+
+# only if localhost is running ...
+npx cypress run
