@@ -13,6 +13,7 @@ import {
   PokemonSprites,
   PokemonType,
 } from '../interfaces/pokemonInterface'
+import { Link } from 'react-router-dom'
 
 interface PokemonProp {
   name: string
@@ -101,32 +102,52 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
   }, [flavorTextUrl])
 
   return (
-    <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
-      <div>{pokemon.id}</div>
-      <CardMedia
-        component="img"
-        alt={name}
-        height="140"
-        style={{ objectFit: 'contain' }}
-        image={pokemon?.sprites?.other['official-artwork']['front_default']}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {pokemon.name?.charAt(0).toUpperCase() + pokemon.name?.slice(1)}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {details.flavor_text}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        {pokemon?.types?.map((t: PokemonType) => (
-          <ColoredChip
-            label={t.type.name}
-            key={t.type.name}
-            eltype={t.type.name}
+    <div>
+      {typeof pokemon.name != 'undefined' ? (
+        <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
+          <div>{pokemon.id}</div>
+          <CardMedia
+            component="img"
+            alt={name}
+            height="140"
+            style={{ objectFit: 'contain' }}
+            image={pokemon?.sprites?.other['official-artwork']['front_default']}
           />
-        ))}
-      </CardActions>
-    </Card>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              <Link
+                to={{
+                  pathname: `/info/${pokemon?.name}`,
+                  state: { pokemon: pokemon },
+                }}
+              >
+                {pokemon.name?.charAt(0).toUpperCase() + pokemon.name?.slice(1)}
+              </Link>
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {details.flavor_text}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            {pokemon?.types?.map((t: PokemonType) => (
+              <ColoredChip
+                label={t.type.name}
+                key={t.type.name}
+                eltype={t.type.name}
+              />
+            ))}
+          </CardActions>
+        </Card>
+      ) : (
+        <img
+          alt="pokeball_spinner"
+          src={
+            'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/029b8bd9-cb5a-41e4-9c7e-ee516face9bb/dayo3ow-7ac86c31-8b2b-4810-89f2-e6134caf1f2d.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzAyOWI4YmQ5LWNiNWEtNDFlNC05YzdlLWVlNTE2ZmFjZTliYlwvZGF5bzNvdy03YWM4NmMzMS04YjJiLTQ4MTAtODlmMi1lNjEzNGNhZjFmMmQuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ooubhxjHp9PIMhVxvCFHziI6pxDAS8glXPWenUeomWs'
+          }
+          height="100"
+          width="100"
+        />
+      )}
+    </div>
   )
 }
