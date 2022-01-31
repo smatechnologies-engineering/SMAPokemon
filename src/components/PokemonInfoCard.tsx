@@ -7,13 +7,19 @@ import Typography from '@mui/material/Typography'
 import Chip, { ChipProps } from '@mui/material/Chip'
 import * as colors from '@mui/material/colors'
 import { styled } from '@mui/material/styles'
+import {
+  PokemonFlavorText,
+  PokemonSpecies,
+  PokemonSprites,
+  PokemonType,
+} from '../interfaces/pokemonInterface'
 
 interface PokemonProp {
   name: string
   url: string
 }
 
-const obj: Record<string, $FixMe> = {
+const obj: Record<string, string> = {
   fire: colors.red[500],
   grass: colors.lime[500],
   electric: colors.yellow[500],
@@ -33,13 +39,13 @@ const obj: Record<string, $FixMe> = {
 }
 
 interface ColoredChipProps extends ChipProps {
-  eltype: $FixMe
+  eltype: string
 }
 
-const ColoredChip = styled(Chip, {
+export const ColoredChip = styled(Chip, {
   shouldForwardProp: (prop) => prop !== 'eltype',
 })<ColoredChipProps>(({ eltype, theme }) => {
-  const color: $FixMe = obj[eltype] || obj.normal
+  const color: string = obj[eltype] || obj.normal
   return {
     color: theme.palette.getContrastText(color),
     backgroundColor: color,
@@ -47,9 +53,12 @@ const ColoredChip = styled(Chip, {
 })
 
 interface Pokemon {
-  types: $FixMe
-  sprites: $FixMe
-  species: $FixMe
+  id: number
+  name: string
+  types: Array<PokemonType>
+  sprites: PokemonSprites
+  species: PokemonSpecies
+  order: string
 }
 
 export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
@@ -64,27 +73,36 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
 
   useEffect(() => {
     ;(async function getData() {
-      const response = await fetch(url)
-      const data = await response.json()
-      setPokemon(data)
+      try {
+        const response = await fetch(url)
+        const data = await response.json()
+        setPokemon(data)
+      } catch (e: any) {
+        throw new Error(e)
+      }
     })()
   }, [url])
 
   useEffect(() => {
     ;(async function getText() {
-      const response = await fetch(flavorTextUrl)
-      const data = await response.json()
+      try {
+        const response = await fetch(flavorTextUrl)
+        const data = await response.json()
 
-      setDetails(
-        data['flavor_text_entries'].find(
-          (t: $FixMe) => t.language.name === 'en'
+        setDetails(
+          data['flavor_text_entries'].find(
+            (t: PokemonFlavorText) => t.language.name === 'en'
+          )
         )
-      )
+      } catch (e: any) {
+        throw new Error(e)
+      }
     })()
   }, [flavorTextUrl])
 
   return (
     <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
+      <div>{pokemon.id}</div>
       <CardMedia
         component="img"
         alt={name}
@@ -94,14 +112,14 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name.charAt(0).toUpperCase() + name.slice(1)}
+          {pokemon.name?.charAt(0).toUpperCase() + pokemon.name?.slice(1)}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           {details.flavor_text}
         </Typography>
       </CardContent>
       <CardActions>
-        {pokemon?.types?.map((t: $FixMe) => (
+        {pokemon?.types?.map((t: PokemonType) => (
           <ColoredChip
             label={t.type.name}
             key={t.type.name}
