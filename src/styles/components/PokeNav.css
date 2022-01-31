@@ -1,0 +1,140 @@
+.topnav
+{
+    background-color: #272727;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+    height: 64px;
+    top: 0;
+}
+
+.topnav ul
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: white;
+}
+
+.topnav ul a
+{
+    display: block;
+  
+    padding: 12px;
+    text-decoration: none;
+    background-color: #272727;
+    color: white;
+}
+
+.topnav ul a:hover
+{
+    background-color: #505050;
+
+}
+
+.topnav .LeMenu
+{
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+
+.topnav .menu-icon
+{
+    padding: 28px 20px;
+    position: relative;
+    float: right;
+    cursor: pointer;
+}
+
+.topnav .menu-icon .nav-icon 
+{
+    background-color: white;
+    display: block;
+    height: 2px;
+    width: 18px;
+    position: relative;
+    transition: background .2s ease-out;
+}
+
+.topnav .menu-icon .nav-icon:before
+{
+    background: white;
+    content:"";
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    top: 5px;
+
+}
+
+.topnav .menu-icon .nav-icon:after
+{
+    background: white;
+    content:"";
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    top: -5px;
+    
+}
+
+.topnav .menu-btn
+{
+    display: none;
+}
+
+.topnav .menu-btn:checked ~ .LeMenu
+{
+    max-height: 400px;
+}
+
+.topnav .menu-btn:checked ~ .menu-icon .nav-icon
+{
+    background-color: transparent;
+}
+
+.topnav .menu-btn:checked ~ .menu-icon .nav-icon:before
+{
+    transform: rotate(-45deg);
+    top: 0;
+
+}
+
+.topnav .menu-btn:checked ~ .menu-icon .nav-icon:after
+{
+    transform: rotate(45deg);
+    top: 0;
+}
+
+@media (min-width: 48em)
+{
+
+    .topnav li 
+    {
+        float: left;
+    }
+
+    .topnav li a
+    {
+        padding: 20px 12px;
+    }
+
+    .topnav .LeMenu
+    {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+
+    .topnav .menu-icon
+    {
+        display: none;
+    }
+}

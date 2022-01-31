@@ -1,0 +1,62 @@
+.TopHalf {
+    background-color: rgb(233, 40, 40);
+    height: 100%;
+    width: 80%;
+    display: inline-block;
+    border: 1px solid black;
+    margin-top: 8%;
+    border-top-right-radius: 10%;
+    border-top-left-radius: 10%;
+}
+
+.Middle {
+    background-color: black;
+    height: 5em;
+    width: 80%;
+    display: inline-block;
+    border: 1px solid black;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.centerLayer {
+    background-color: white;
+    height: 60%;
+    width: 70px;
+    border: 2px solid black;
+    border-radius: 30%;
+    z-index: 1;
+    top: 8%;
+    position: relative;
+    margin: auto;
+    text-align: center;
+}
+
+.BottomHalf {
+    background-color: white;
+    height: 47%;
+    width: 80%;
+    display: inline-block;
+    border: 1px solid black;
+}
+
+.container {
+    background: rgb(69,69,69);
+    background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.about-btn {
+    top:10%;
+}
+
+.PokemonProfessorBox {
+    display: inline-block;
+}
+
+.box {
+    height: 4em;
+}
