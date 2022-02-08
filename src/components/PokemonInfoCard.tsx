@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -7,13 +7,15 @@ import Typography from '@mui/material/Typography'
 import Chip, { ChipProps } from '@mui/material/Chip'
 import * as colors from '@mui/material/colors'
 import { styled } from '@mui/material/styles'
+import PokeLoading from './PokeLoading'
+// import * as types from '@material-ui/types'
 
 interface PokemonProp {
   name: string
   url: string
 }
 
-const obj: Record<string, $FixMe> = {
+const obj: Record<any, { [key in Colors]: { [key in Grades]: string } }> = {
   fire: colors.red[500],
   grass: colors.lime[500],
   electric: colors.yellow[500],
@@ -32,8 +34,58 @@ const obj: Record<string, $FixMe> = {
   steel: colors.grey[600],
 }
 
+type Grades =
+  | '50'
+  | '100'
+  | '200'
+  | '300'
+  | '400'
+  | '500'
+  | '600'
+  | '700'
+  | '800'
+  | '900'
+  | 'A100'
+  | 'A200'
+  | 'A400'
+  | 'A700'
+
+type Colors =
+  | 'red'
+  | 'lime'
+  | 'yellow'
+  | 'purple'
+  | 'purple'
+  | 'lightBlue'
+  | 'lightBlue'
+  | 'pink'
+  | 'brown'
+  | 'green'
+  | 'amber'
+  | 'pink'
+  | 'grey'
+  | 'blue'
+  | 'amber'
+  | 'grey'
+
 interface ColoredChipProps extends ChipProps {
-  eltype: $FixMe
+  eltype:
+    | 'fire'
+    | 'grass'
+    | 'electric'
+    | 'poison'
+    | 'ghost'
+    | 'water'
+    | 'ice'
+    | 'fairy'
+    | 'fighting'
+    | 'bug'
+    | 'rock'
+    | 'psychic'
+    | 'normal'
+    | 'flying'
+    | 'ground'
+    | 'steel'
 }
 
 const ColoredChip = styled(Chip, {
@@ -47,9 +99,27 @@ const ColoredChip = styled(Chip, {
 })
 
 interface Pokemon {
-  types: $FixMe
-  sprites: $FixMe
-  species: $FixMe
+  types: string
+  sprites: string
+  species: $fixme
+}
+
+interface PokemonDetails {
+  flavor_text: string
+}
+
+interface tProps {
+  language: {
+    name: string
+  }
+}
+
+interface pokemonTypesProps {
+  slot: number
+  type: {
+    name: string
+    url: string
+  }
 }
 
 export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
@@ -57,32 +127,52 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
     pokemon: { name, url },
   } = props
   const [pokemon, setPokemon] = useState<Pokemon>({} as Pokemon)
-  const [details, setDetails] = useState({
-    flavor_text: "This pokemons' flavor text.",
+  const [details, setDetails] = useState<PokemonDetails>({
+    flavor_text: 'Loading...',
   })
-  const flavorTextUrl = pokemon.species?.url
+  // const flavorTextUrl = pokemon.species?.url
 
-  useEffect(() => {
-    ;(async function getData() {
+  const fetchInfo = useCallback(async () => {
+    try {
       const response = await fetch(url)
       const data = await response.json()
       setPokemon(data)
-    })()
+    } catch (e) {
+      console.log(e)
+    }
   }, [url])
 
   useEffect(() => {
-    ;(async function getText() {
-      const response = await fetch(flavorTextUrl)
-      const data = await response.json()
+    fetchInfo()
+  }, [fetchInfo])
 
-      setDetails(
-        data['flavor_text_entries'].find(
-          (t: $FixMe) => t.language.name === 'en'
-        )
-      )
-    })()
-  }, [flavorTextUrl])
+  useEffect(() => {
+    console.log('Thiajsdf')
+    const flavorTextUrl = pokemon?.species?.url
+    try {
+      fetch(flavorTextUrl)
+        .then((data) => data.json())
+        .then((data) => {
+          setDetails(
+            data['flavor_text_entries'].find(
+              (t: tProps) => t.language.name === 'en'
+            )
+          )
+        })
 
+      // const data = response.json()
+    } catch (e) {
+      console.log(e)
+    }
+  }, [pokemon])
+
+  if (Object.keys(pokemon).length == 0) {
+    return (
+      <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
+        <PokeLoading />
+      </Card>
+    )
+  }
   return (
     <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
       <CardMedia
@@ -92,7 +182,7 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
         style={{ objectFit: 'contain' }}
         image={pokemon?.sprites?.other['official-artwork']['front_default']}
       />
-      <CardContent>
+      <CardContent data-cy="PokemonCard">
         <Typography gutterBottom variant="h5" component="div">
           {name.charAt(0).toUpperCase() + name.slice(1)}
         </Typography>
@@ -100,8 +190,8 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
           {details.flavor_text}
         </Typography>
       </CardContent>
-      <CardActions>
-        {pokemon?.types?.map((t: $FixMe) => (
+      <CardActions style={{ display: 'flex', justifyContent: 'center' }}>
+        {pokemon?.types?.map((t: pokemonTypesProps) => (
           <ColoredChip
             label={t.type.name}
             key={t.type.name}

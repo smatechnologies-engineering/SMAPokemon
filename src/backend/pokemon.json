@@ -1,6 +1,6 @@
 {
   "count": 1118,
-  "next": "https://pokeapi.co/api/v2/pokemon?offset=100&limit=20",
+  "next": "https://pokeapi.co/api/v2/pokemon?offset=151&limit=20",
   "previous": null,
   "results": [
     { "name": "bulbasaur", "url": "https://pokeapi.co/api/v2/pokemon/1/" },
@@ -102,6 +102,7 @@
     { "name": "hypno", "url": "https://pokeapi.co/api/v2/pokemon/97/" },
     { "name": "krabby", "url": "https://pokeapi.co/api/v2/pokemon/98/" },
     { "name": "kingler", "url": "https://pokeapi.co/api/v2/pokemon/99/" },
-    { "name": "voltorb", "url": "https://pokeapi.co/api/v2/pokemon/100/" }
+    { "name": "voltorb", "url": "https://pokeapi.co/api/v2/pokemon/100/" },
+    { "name": "exeggcute", "url": "https://pokeapi.co/api/v2/pokemon/101/"}
   ]
 }

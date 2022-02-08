@@ -6,29 +6,40 @@ import Container from '@mui/material/Container'
 import { PokemonInfoCard } from '../components/PokemonInfoCard'
 
 export function PokemonSearch() {
-  const [val, setVal] = useState('')
-  const [pokemonFound, setPokemonFound] = useState(false)
-  const [pokemon, setPokemon] = useState()
-  const handleChange = (e: $FixMe) => {
-    setVal(e.target.value)
+  interface PokemonSearchState {
+    val: string | undefined
+    pokemonFound: boolean
+    pokemon: $FixMe
+    enterValue: string
   }
 
-  const url = `https://pokeapi.co/api/v2/pokemon/${val}/`
+  const [val, setVal] = useState<string>('')
+  const [pokemonFound, setPokemonFound] = useState<boolean>(false)
+  const [pokemon, setPokemon] = useState<$FixMe>()
+  const [error, setError] = useState<boolean>(false)
 
-  useEffect(() => {
-    ;(async () => {
+  const handleChange = (e: { target: { value: string } }) => {
+    setVal(e.target.value.toLowerCase())
+    setError(false)
+  }
+
+  const fetchPokemon = async (e) => {
+    e.preventDefault()
+    const url = `https://pokeapi.co/api/v2/pokemon/${val}/`
+    if (val) {
+      console.log(val)
       try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${val}/`
-        )
+        const response = await fetch(url)
         const data = await response.json()
         setPokemon(data)
         setPokemonFound(true)
       } catch (e) {
         console.error(e)
+        setError(true)
+        setPokemonFound(false)
       }
-    })()
-  }, [val])
+    }
+  }
 
   return (
     <Container
@@ -37,21 +48,49 @@ export function PokemonSearch() {
     >
       <Grid container spacing={{ xs: 4 }} columns={{ xs: 4 }}>
         <Grid item xs={4} sm={4} md={4}>
-          <Typography variant="h2">Find your Pokemon</Typography>
+          <Typography variant="h4">Find your Pokemon</Typography>
         </Grid>
 
-        {pokemonFound ? (
-          <Grid item xs={4} sm={4} md={4}>
-            <PokemonInfoCard pokemon={{ name: val, url }} />
-          </Grid>
-        ) : null}
         <Grid item xs={4} sm={4} md={4}>
-          <TextField
-            variant="outlined"
-            color="secondary"
-            label="search pokemon"
-            onChange={handleChange}
-          />
+          <form onSubmit={fetchPokemon}>
+            <TextField
+              variant="filled"
+              color="secondary"
+              label="search pokemon"
+              onChange={handleChange}
+            />
+          </form>
+          <div
+            className="pokemonInfoBox"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              border: '1px',
+            }}
+          >
+            {pokemonFound ? (
+              <Grid
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginTop: '32px ',
+                }}
+                item
+                xs={4}
+                sm={4}
+                md={4}
+              >
+                <PokemonInfoCard
+                  pokemon={{
+                    name: pokemon.name,
+                    url: `https://pokeapi.co/api/v2/pokemon/${val}/`,
+                  }}
+                />
+              </Grid>
+            ) : error ? (
+              <p>Could not find pokemon</p>
+            ) : null}
+          </div>
         </Grid>
       </Grid>
     </Container>

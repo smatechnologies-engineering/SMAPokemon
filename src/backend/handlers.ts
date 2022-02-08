@@ -14,7 +14,7 @@ export const handlers = [
       })
     )
   }),
-  rest.get('https://pokeapi.co/api/v2/pokemon', async (req, res, ctx) => {
-    return res(ctx.json(pokemon))
-  }),
+  // rest.get('https://pokeapi.co/api/v2/pokemon', async (req, res, ctx) => {
+  //   return res(ctx.json(pokemon))
+  // }),
 ]
