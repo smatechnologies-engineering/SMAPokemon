@@ -6,13 +6,6 @@ import Container from '@mui/material/Container'
 import { PokemonInfoCard } from '../components/PokemonInfoCard'
 
 export function PokemonSearch() {
-  // interface PokemonSearchState {
-  //   val: string | undefined
-  //   pokemonFound: boolean
-  //   pokemon: $FixMe
-  //   enterValue: string
-  // }
-
   const [val, setVal] = useState<string>('')
   const [pokemonFound, setPokemonFound] = useState<boolean>(false)
   const [pokemon, setPokemon] = useState<$FixMe>()
