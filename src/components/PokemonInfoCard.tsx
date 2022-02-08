@@ -15,7 +15,7 @@ interface PokemonProp {
   url: string
 }
 
-const obj: Record<any, { [key in Colors]: { [key in Grades]: string } }> = {
+const obj: Record<element, color['colors'][Colors][Grades]> = {
   fire: colors.red[500],
   grass: colors.lime[500],
   electric: colors.yellow[500],
@@ -49,6 +49,7 @@ type Grades =
   | 'A200'
   | 'A400'
   | 'A700'
+type color = { colors: { [key in Colors]: { [key in Grades]: string } } }
 
 type Colors =
   | 'red'
@@ -68,24 +69,26 @@ type Colors =
   | 'amber'
   | 'grey'
 
+type element =
+  | 'fire'
+  | 'grass'
+  | 'electric'
+  | 'poison'
+  | 'ghost'
+  | 'water'
+  | 'ice'
+  | 'fairy'
+  | 'fighting'
+  | 'bug'
+  | 'rock'
+  | 'psychic'
+  | 'normal'
+  | 'flying'
+  | 'ground'
+  | 'steel'
+
 interface ColoredChipProps extends ChipProps {
-  eltype:
-    | 'fire'
-    | 'grass'
-    | 'electric'
-    | 'poison'
-    | 'ghost'
-    | 'water'
-    | 'ice'
-    | 'fairy'
-    | 'fighting'
-    | 'bug'
-    | 'rock'
-    | 'psychic'
-    | 'normal'
-    | 'flying'
-    | 'ground'
-    | 'steel'
+  eltype: element
 }
 
 const ColoredChip = styled(Chip, {
@@ -99,9 +102,17 @@ const ColoredChip = styled(Chip, {
 })
 
 interface Pokemon {
-  types: string
-  sprites: string
-  species: $fixme
+  types: pokemonTypesProps[]
+  sprites: {
+    other: {
+      'official-artwork': {
+        front_default: string
+      }
+    }
+  }
+  species: {
+    url: string
+  }
 }
 
 interface PokemonDetails {
@@ -117,7 +128,7 @@ interface tProps {
 interface pokemonTypesProps {
   slot: number
   type: {
-    name: string
+    name: element
     url: string
   }
 }
@@ -138,7 +149,7 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
       const data = await response.json()
       setPokemon(data)
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
   }, [url])
 
@@ -147,7 +158,6 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
   }, [fetchInfo])
 
   useEffect(() => {
-    console.log('Thiajsdf')
     const flavorTextUrl = pokemon?.species?.url
     try {
       fetch(flavorTextUrl)
@@ -159,10 +169,8 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
             )
           )
         })
-
-      // const data = response.json()
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
   }, [pokemon])
 

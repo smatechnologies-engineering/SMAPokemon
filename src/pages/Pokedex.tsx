@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, MouseEventHandler } from 'react'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import { PokemonInfoCard } from '../components/PokemonInfoCard'
@@ -19,9 +19,8 @@ export function Pokedex() {
       )
       const data = await response.json()
       setPokemons(data.results)
-      // console.log({ pokemons })
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -46,7 +45,7 @@ export function Pokedex() {
           </button>
         }
       >
-        {(close) => (
+        {(close: MouseEventHandler<HTMLButtonElement> | undefined) => (
           <div>
             <button className="close" onClick={close}>
               Close

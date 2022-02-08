@@ -6,12 +6,12 @@ import Container from '@mui/material/Container'
 import { PokemonInfoCard } from '../components/PokemonInfoCard'
 
 export function PokemonSearch() {
-  interface PokemonSearchState {
-    val: string | undefined
-    pokemonFound: boolean
-    pokemon: $FixMe
-    enterValue: string
-  }
+  // interface PokemonSearchState {
+  //   val: string | undefined
+  //   pokemonFound: boolean
+  //   pokemon: $FixMe
+  //   enterValue: string
+  // }
 
   const [val, setVal] = useState<string>('')
   const [pokemonFound, setPokemonFound] = useState<boolean>(false)
@@ -23,11 +23,10 @@ export function PokemonSearch() {
     setError(false)
   }
 
-  const fetchPokemon = async (e) => {
+  const fetchPokemon = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
     const url = `https://pokeapi.co/api/v2/pokemon/${val}/`
     if (val) {
-      console.log(val)
       try {
         const response = await fetch(url)
         const data = await response.json()
