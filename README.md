@@ -12,7 +12,7 @@ This app uses a lot of fun things. Take a look at the `package.json`
 
 **RECOMMENDED VSCODE EXTENSIONS:** eslint and prettier
 
-**TIPS:** best thing you can do is play with it a bit and fix all the things that bother you :).
+**TIPS:** best thing you can do is play with it a bit and fix all the things that bother you 🙂.
 
 ---
 
