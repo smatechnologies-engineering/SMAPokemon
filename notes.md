@@ -14,4 +14,11 @@ Just some notes I wanted to type up while doing this coding challenge.
 
 Before starting this project I updated my node and npm versions to the latest version. My npm is on 8.4.1 and node is on 17.5.0. It seems like going from npm version 6 to 7 causes the lockfile to change a bit so there is a new `packages` field in the lockfile along with some minor updates so I'm guessing the current lockfile was generated using an npm version earlier than 7. For this coding challenge I did not want to push up a bunch of changes in the package-lock.json, however if this were a real project we were working on I'd discuss with the team these changes and whether we should upgrade our npm version to the latest. Also recommend talking about establishing specific npm and node versions or at least a range of versions.
 
+## Header
+
+I would like a header with navigation links so that I can move around the app better. There is a material ui header so I figured I'd use that.
+
+## Miscellaneous Things
+
+- lint rule to make unused imports an error
 
