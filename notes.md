@@ -18,6 +18,10 @@ Before starting this project I updated my node and npm versions to the latest ve
 
 I would like a header with navigation links so that I can move around the app better. There is a material ui header so I figured I'd use that.
 
+## Home Page
+
+Add a small home page.
+
 ## Miscellaneous Things
 
 - lint rule to make unused imports an error

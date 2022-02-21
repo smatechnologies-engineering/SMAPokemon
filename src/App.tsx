@@ -1,6 +1,7 @@
 import './App.css'
 import { Pokedex } from './pages/Pokedex'
 import { PokemonSearch } from './pages/PokemonSearch'
+import { Home } from './pages/Home'
 import { Header } from './components/Header'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
@@ -11,7 +12,7 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/">
-            <p>WIP: Home Page</p>
+            <Home />
           </Route>
           <Route path="/pokedex">
             <Pokedex />
