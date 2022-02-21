@@ -26,7 +26,7 @@ describe('Search Page', () => {
   })
   it('should successfully search for a second pokemon', () => {
     PageObjects.visitSearchPage()
-    PageObjects.typeInSearchInput('pikachu{enter}')
+    PageObjects.typeInSearchInput('pikachu')
     PageObjects.isPokemonInfoCardVisible('pikachu')
     PageObjects.clearSearchInput()
     PageObjects.typeInSearchInput('raichu')

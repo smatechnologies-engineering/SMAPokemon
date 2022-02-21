@@ -22,6 +22,10 @@ I would like a header with navigation links so that I can move around the app be
 
 Add a small home page.
 
+## Integration Tests
+
+I created some integration tests. I figured I'd ensure the right pages were displayed for each url, the header navigation links work and that the search page can successfully search for pokemon. I also added some data-qa attributes to easily get elements.
+
 ## Miscellaneous Things
 
 - lint rule to make unused imports an error
