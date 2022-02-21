@@ -1,9 +1,8 @@
 import AppBar from '@mui/material/AppBar'
 import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
 
 import { Link } from 'react-router-dom'
-
-import './Header.css'
 
 export function Header() {
   return (
@@ -19,8 +18,9 @@ export function Header() {
       }}
     >
       <Link to="/" data-qa="home-link">
-        <img
-          className="Pokemon-Logo"
+        <Box
+          sx={{ height: '64px' }}
+          component="img"
           src="/src/Pokemon-Logo-700x394.png"
           alt="Pokemon Logo"
         />
