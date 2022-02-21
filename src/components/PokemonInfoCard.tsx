@@ -84,7 +84,10 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
   }, [flavorTextUrl])
 
   return (
-    <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
+    <Card
+      sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}
+      data-qa={`pokemon-info-card-${name}`}
+    >
       <CardMedia
         component="img"
         alt={name}

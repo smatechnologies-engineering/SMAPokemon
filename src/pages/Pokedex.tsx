@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import { PokemonInfoCard } from '../components/PokemonInfoCard'
+import { PageContainer } from '../components/PageContainer'
 
 interface Pokemon {
   name: string
@@ -19,7 +19,7 @@ export function Pokedex() {
     })()
   }, [])
   return (
-    <Container style={{ paddingBottom: 24, paddingTop: 24 }} maxWidth={'lg'}>
+    <PageContainer dataQA={'pokedex-page'}>
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
@@ -32,6 +32,6 @@ export function Pokedex() {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </PageContainer>
   )
 }

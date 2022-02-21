@@ -18,17 +18,17 @@ export function Header() {
         paddingLeft: '16px',
       }}
     >
-      <Link to="/">
+      <Link to="/" data-qa="home-link">
         <img
           className="Pokemon-Logo"
           src="/src/Pokemon-Logo-700x394.png"
           alt="Pokemon Logo"
         />
       </Link>
-      <Link to="/pokedex">
+      <Link to="/pokedex" data-qa="pokedex-link">
         <Typography variant="h6">Pokédex</Typography>
       </Link>
-      <Link to="/search">
+      <Link to="/search" data-qa="search-link">
         <Typography variant="h6">Search</Typography>
       </Link>
     </AppBar>
