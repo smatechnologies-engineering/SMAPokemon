@@ -26,6 +26,14 @@ Add a small home page.
 
 I created some integration tests. I figured I'd ensure the right pages were displayed for each url, the header navigation links work and that the search page can successfully search for pokemon. I also added some data-qa attributes to easily get elements.
 
+## PokedexContextProvider
+
+I wanted to save the pokedex in Context so that I would have access to it throughout the app and would not need to keep requesting it across pages.
+
+## Search Page
+
+I made the search page a bit nicer looking.
+
 ## Miscellaneous Things
 
 - lint rule to make unused imports an error
