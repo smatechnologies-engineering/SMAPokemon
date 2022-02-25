@@ -9,7 +9,7 @@ export interface PokeapiPokedexResponse {
   results: Array<{ name: string; url: string }>
 }
 
-const PokedexContext = createContext<Pokedex>({})
+export const PokedexContext = createContext<Pokedex>({})
 
 export const usePokedex = () => useContext(PokedexContext)
 
