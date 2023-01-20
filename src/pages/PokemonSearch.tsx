@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -7,28 +7,12 @@ import { PokemonInfoCard } from '../components/PokemonInfoCard'
 
 export function PokemonSearch() {
   const [val, setVal] = useState('')
-  const [pokemonFound, setPokemonFound] = useState(false)
-  const [pokemon, setPokemon] = useState()
+
   const handleChange = (e: $FixMe) => {
     setVal(e.target.value)
   }
 
   const url = `https://pokeapi.co/api/v2/pokemon/${val}/`
-
-  useEffect(() => {
-    ;(async () => {
-      try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${val}/`
-        )
-        const data = await response.json()
-        setPokemon(data)
-        setPokemonFound(true)
-      } catch (e) {
-        console.error(e)
-      }
-    })()
-  }, [val])
 
   return (
     <Container
@@ -40,11 +24,10 @@ export function PokemonSearch() {
           <Typography variant="h2">Find your Pokemon</Typography>
         </Grid>
 
-        {pokemonFound ? (
-          <Grid item xs={4} sm={4} md={4}>
-            <PokemonInfoCard pokemon={{ name: val, url }} />
-          </Grid>
-        ) : null}
+        <Grid item xs={4} sm={4} md={4}>
+          <PokemonInfoCard pokemon={{ name: val, url }} />
+        </Grid>
+
         <Grid item xs={4} sm={4} md={4}>
           <TextField
             variant="outlined"
