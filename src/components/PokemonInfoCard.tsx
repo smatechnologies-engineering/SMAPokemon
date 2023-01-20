@@ -65,8 +65,12 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
   useEffect(() => {
     ;(async function getData() {
       const response = await fetch(url)
-      const data = await response.json()
-      setPokemon(data)
+      if (response.ok) {
+        const data = await response.json()
+        setPokemon(data)
+      } else {
+        setPokemon({} as Pokemon);
+      }
     })()
   }, [url])
 
@@ -82,6 +86,8 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
       )
     })()
   }, [flavorTextUrl])
+
+  if (!pokemon.types) return null;
 
   return (
     <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
