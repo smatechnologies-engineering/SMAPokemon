@@ -2,14 +2,10 @@ import { useState, useEffect } from 'react'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import { PokemonInfoCard } from '../components/PokemonInfoCard'
-
-interface Pokemon {
-  name: string
-  url: string
-}
+import { NamedAPIResource } from 'pokenode-ts'
 
 export function Pokedex() {
-  const [pokemon, setPokemon] = useState<Array<Pokemon>>([])
+  const [pokemon, setPokemon] = useState<Array<NamedAPIResource>>([])
 
   useEffect(() => {
     ;(async function getPokemon() {
@@ -27,7 +23,7 @@ export function Pokedex() {
       >
         {pokemon.map((p) => (
           <Grid item xs={4} sm={4} md={4} key={p.name}>
-            <PokemonInfoCard pokemon={p} />
+            <PokemonInfoCard name={p.name} url={p.url} />
             <br />
           </Grid>
         ))}

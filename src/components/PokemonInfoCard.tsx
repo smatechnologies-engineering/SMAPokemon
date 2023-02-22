@@ -7,8 +7,10 @@ import Typography from '@mui/material/Typography'
 import Chip, { ChipProps } from '@mui/material/Chip'
 import * as colors from '@mui/material/colors'
 import { styled } from '@mui/material/styles'
+import { FlavorText, Pokemon, PokemonType } from 'pokenode-ts'
+import logo from '../assests/Pokemon-Logo-700x394.png'
 
-interface PokemonProp {
+interface PokemonInfoCardProps {
   name: string
   url: string
 }
@@ -46,16 +48,8 @@ const ColoredChip = styled(Chip, {
   }
 })
 
-interface Pokemon {
-  types: $FixMe
-  sprites: $FixMe
-  species: $FixMe
-}
-
-export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
-  const {
-    pokemon: { name, url },
-  } = props
+export function PokemonInfoCard(props: PokemonInfoCardProps) {
+  const { name, url } = props
   const [pokemon, setPokemon] = useState<Pokemon>({} as Pokemon)
   const [details, setDetails] = useState({
     flavor_text: "This pokemons' flavor text.",
@@ -77,7 +71,7 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
 
       setDetails(
         data['flavor_text_entries'].find(
-          (t: $FixMe) => t.language.name === 'en'
+          (t: FlavorText) => t.language.name === 'en'
         )
       )
     })()
@@ -90,7 +84,9 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
         alt={name}
         height="140"
         style={{ objectFit: 'contain' }}
-        image={pokemon?.sprites?.other['official-artwork']['front_default']}
+        image={
+          pokemon?.sprites?.other['official-artwork']['front_default'] ?? logo
+        }
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -101,7 +97,7 @@ export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
         </Typography>
       </CardContent>
       <CardActions>
-        {pokemon?.types?.map((t: $FixMe) => (
+        {pokemon?.types?.map((t: PokemonType) => (
           <ColoredChip
             label={t.type.name}
             key={t.type.name}
