@@ -17,8 +17,8 @@ export function PokemonSearch() {
 
   const { data: pokemonData } = useQuery<Pokemon>(`pokemon-info-${debouncedPokemonSearch}`,
     async () => {
-      const response = await fetch(url)
-      const data = await response.json()
+      const response = await fetch(url);
+      const data = await response.json();
       return data
     },
     {
