@@ -15,11 +15,12 @@ export function PokemonSearch() {
   const debouncedPokemonSearch = useDebounce(val.toLowerCase(), 300)
   const url = `https://pokeapi.co/api/v2/pokemon/${val.toLowerCase()}`
 
-  const { data: pokemonData } = useQuery<Pokemon>(`pokemon-info-${debouncedPokemonSearch}`,
+  const { data: pokemonData } = useQuery<Pokemon>(
+    `pokemon-info-${debouncedPokemonSearch}`,
     async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      return data;
+      const response = await fetch(url)
+      const data = await response.json()
+      return data
     },
     {
       enabled: val !== '' && !!debouncedPokemonSearch,

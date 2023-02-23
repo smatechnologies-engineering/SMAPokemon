@@ -5,6 +5,7 @@ import App from './App'
 import CssBaseline from '@mui/material/CssBaseline'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { worker } from './backend/browser'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 const theme = createTheme()
 
@@ -14,13 +15,17 @@ async function prepare() {
   }
 }
 
+const queryClient = new QueryClient()
+
 prepare().then(() => {
   ReactDOM.render(
     <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </QueryClientProvider>
     </React.StrictMode>,
     document.getElementById('root')
   )

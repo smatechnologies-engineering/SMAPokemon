@@ -16,7 +16,8 @@
     "coverage:clean": "rm -rf coverage .nyc_output",
     "coverage:merge": "istanbul-merge --out coverage/merged/coverage-final.json ./coverage/unit/coverage-final.json  ./coverage/e2e/coverage-final.json",
     "coverage:merge-report": "nyc report --reporter=lcov --reporter=text --temp-dir=./coverage/merged --report-dir=./coverage/merged",
-    "coverage:report": "nyc report --check-coverage"
+    "coverage:report": "nyc report --check-coverage",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/react": "^11.4.1",
@@ -26,6 +27,7 @@
     "pokenode-ts": "^1.17.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^5.3.0"
   },
   "devDependencies": {
@@ -58,10 +60,11 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-testing-library": "^4.12.4",
-    "husky": "^7.0.2",
+    "husky": "^8.0.3",
     "identity-obj-proxy": "^3.0.0",
     "istanbul-merge": "^1.1.1",
     "jest": "^27.2.2",
+    "lint-staged": "^13.1.2",
     "msw": "^0.35.0",
     "prettier": "^2.4.1",
     "ts-jest": "^27.0.5",
@@ -79,5 +82,10 @@
   },
   "msw": {
     "workerDirectory": "public"
+  },
+  "lint-staged": {
+    "**/*.{.js,jsx,ts,tsx}": [
+      "npm run lint"
+    ]
   }
 }

@@ -1,11 +1,4 @@
-import {
-  AppBar,
-  Button,
-  Container,
-  Stack,
-  Toolbar,
-  Typography,
-} from '@mui/material'
+import { AppBar, Button, Container, Stack, Toolbar } from '@mui/material'
 import { Link } from 'react-router-dom'
 import logo from '../assests/Pokemon-Logo-700x394.png'
 import '../App.css'
@@ -24,11 +17,11 @@ export function NavBar() {
             marginLeft: '20px',
           }}
         >
-          <Link to="/pokedex" className="navbar-link">
-            All Pokemon
-          </Link>
           <Link to="/" className="navbar-link">
             Pokemon Search
+          </Link>
+          <Link to="/pokedex" className="navbar-link">
+            All Pokemon
           </Link>
         </Stack>
       </Toolbar>

@@ -1,10 +1,9 @@
 import './App.css'
 import { Pokedex } from './pages/Pokedex'
 import { PokemonSearch } from './pages/PokemonSearch'
-import { BrowserRouter, Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Box from '@mui/material/Box'
-
-import { NavBar } from './components/Navbar'
+import { NavBar } from './components/NavBar'
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -9,6 +9,7 @@ import * as colors from '@mui/material/colors'
 import { styled } from '@mui/material/styles'
 import { FlavorText, Pokemon, PokemonType } from 'pokenode-ts'
 import logo from '../assests/Pokemon-Logo-700x394.png'
+import { useQuery } from 'react-query'
 
 interface PokemonInfoCardProps {
   name: string
@@ -50,32 +51,32 @@ const ColoredChip = styled(Chip, {
 
 export function PokemonInfoCard(props: PokemonInfoCardProps) {
   const { name, url } = props
-  const [pokemon, setPokemon] = useState<Pokemon>({} as Pokemon)
-  const [details, setDetails] = useState({
-    flavor_text: "This pokemons' flavor text.",
-  })
-  const flavorTextUrl = pokemon.species?.url
 
-  useEffect(() => {
-    ;(async function getData() {
+  const { data: pokemon } = useQuery<Pokemon>(
+    `pokemon-info-${name}`,
+    async () => {
       const response = await fetch(url)
       const data = await response.json()
-      setPokemon(data)
-    })()
-  }, [url])
+      return data
+    }
+  )
 
-  useEffect(() => {
-    ;(async function getText() {
-      const response = await fetch(flavorTextUrl)
-      const data = await response.json()
+  const { data: flavorText } = useQuery<string>(
+    `${name}-flavor-text`,
+    async () => {
+      const response = await fetch(pokemon?.species?.url)
+      const data: FlavorText[] = await response.json()
 
-      setDetails(
-        data['flavor_text_entries'].find(
-          (t: FlavorText) => t.language.name === 'en'
-        )
+      const flavorText: FlavorText = data['flavor_text_entries'].find(
+        (t: FlavorText) => t.language.name === 'en'
       )
-    })()
-  }, [flavorTextUrl])
+
+      return flavorText.flavor_text
+    },
+    {
+      enabled: !!pokemon,
+    }
+  )
 
   return (
     <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
@@ -90,10 +91,10 @@ export function PokemonInfoCard(props: PokemonInfoCardProps) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name.charAt(0).toUpperCase() + name.slice(1)}
+          {name?.charAt(0).toUpperCase() + name?.slice(1)}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {details.flavor_text}
+          {flavorText}
         </Typography>
       </CardContent>
       <CardActions>

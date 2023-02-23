@@ -3,7 +3,7 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import NotFoundImage from '../assests/PokemonNotFoundImage.png'
-import React from 'react'
+import { memo } from 'react'
 
 function PokemonNotFound() {
   return (
@@ -24,4 +24,4 @@ function PokemonNotFound() {
   )
 }
 
-export default React.memo(PokemonNotFound)
+export default memo(PokemonNotFound)
