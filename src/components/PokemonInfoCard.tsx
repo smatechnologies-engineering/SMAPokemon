@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -64,10 +63,10 @@ export function PokemonInfoCard(props: PokemonInfoCardProps) {
   const { data: flavorText } = useQuery<string>(
     `${name}-flavor-text`,
     async () => {
-      const response = await fetch(pokemon?.species?.url)
-      const data: FlavorText[] = await response.json()
+      const response = await fetch(pokemon?.species?.url as RequestInfo)
+      const data = await response.json()
 
-      const flavorText: FlavorText = data['flavor_text_entries'].find(
+      const flavorText: FlavorText = data.flavor_text_entries.find(
         (t: FlavorText) => t.language.name === 'en'
       )
 
@@ -78,19 +77,28 @@ export function PokemonInfoCard(props: PokemonInfoCardProps) {
     }
   )
 
+  const cardImageUrl =
+    pokemon?.sprites?.other?.['official-artwork']['front_default'] ?? logo
+
   return (
-    <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
+    <Card
+      sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}
+      aria-label="pokemon-info-card"
+    >
       <CardMedia
         component="img"
         alt={name}
         height="140"
         style={{ objectFit: 'contain' }}
-        image={
-          pokemon?.sprites?.other['official-artwork']['front_default'] ?? logo
-        }
+        image={cardImageUrl}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          aria-label="pokemon-info-card-name"
+        >
           {name?.charAt(0).toUpperCase() + name?.slice(1)}
         </Typography>
         <Typography variant="body2" color="text.secondary">
