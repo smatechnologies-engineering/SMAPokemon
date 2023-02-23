@@ -6,35 +6,37 @@ import Container from '@mui/material/Container'
 import { PokemonInfoCard } from '../components/PokemonInfoCard'
 import PokemonNotFound from '../components/PokemonNotFound'
 import { Pokemon } from 'pokenode-ts'
+import { useQuery } from 'react-query'
+import { useDebounce } from '../hooks/useDebounce'
 
 export function PokemonSearch() {
   const [val, setVal] = useState('')
   const [pokemonFound, setPokemonFound] = useState(false)
-  const [pokemonData, setPokemonData] = useState<Pokemon>({} as Pokemon)
+  const debouncedPokemonSearch = useDebounce(val.toLowerCase(), 300)
+  const url = `https://pokeapi.co/api/v2/pokemon/${val.toLowerCase()}`
+
+  const { data: pokemonData } = useQuery<Pokemon>(`pokemon-info-${debouncedPokemonSearch}`,
+    async () => {
+      const response = await fetch(url)
+      const data = await response.json()
+      return data
+    },
+    {
+      enabled: val !== '' && !!debouncedPokemonSearch,
+    }
+  )
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVal(e.target.value)
   }
 
-  const POKE_API_URL = `https://pokeapi.co/api/v2/pokemon/`
-
   useEffect(() => {
-    const getPokemon = setTimeout(async () => {
-      const formattedVal = val.toLowerCase()
-      try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${formattedVal}/`
-        )
-        const data = await response.json()
-        setPokemonData(data)
-        setPokemonFound(true)
-      } catch (e) {
-        setPokemonFound(false)
-        console.error('Error fetching pokemon', e)
-      }
-    }, 200)
-
-    return () => clearTimeout(getPokemon)
-  }, [val])
+    if (pokemonData) {
+      setPokemonFound(true)
+    } else {
+      setPokemonFound(false)
+    }
+  }, [pokemonData])
 
   return (
     <Container
@@ -52,14 +54,11 @@ export function PokemonSearch() {
           <Typography variant="h2">Find your Pokemon</Typography>
         </Grid>
 
-        {pokemonFound ? (
+        {pokemonData && (
           <Grid item xs={4} sm={4} md={4}>
-            <PokemonInfoCard
-              name={pokemonData.name}
-              url={POKE_API_URL + val.toLowerCase()}
-            />
+            <PokemonInfoCard name={pokemonData?.name ?? ''} url={url} />
           </Grid>
-        ) : null}
+        )}
         {!pokemonFound && val !== '' && <PokemonNotFound />}
         <Grid item xs={4} sm={4} md={4}>
           <TextField
