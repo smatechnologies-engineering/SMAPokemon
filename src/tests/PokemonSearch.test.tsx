@@ -17,7 +17,7 @@ jest.mock('../hooks/useGetFlavorText', () => ({
 }))
 
 describe('Pokemon Search', () => {
-  test('it renders "Find your Pokemon Search"', () => {
+  test('it renders "Find your Pokemon"', () => {
     render(<App />)
     const linkElement = screen.getByText(/Find your Pokemon/i)
     expect(linkElement).toBeInTheDocument()
