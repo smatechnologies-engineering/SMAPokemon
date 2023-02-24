@@ -1,3 +1,6 @@
+export const pikachuFlavorText =
+  'When several of\nthese POKéMON\ngather, their\felectricity could\nbuild and cause\nlightning storms.'
+
 export const pikachu = {
   abilities: [
     {

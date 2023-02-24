@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider, QueryCache } from 'react-query'
-import { ReactElement, ReactNode } from 'react'
-import { render } from '@testing-library/react'
+import { ReactNode } from 'react'
 
 export const queryCache = new QueryCache()
 
@@ -19,20 +18,4 @@ export const wrapper = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   )
-}
-
-export function renderWithClient(ui: ReactNode) {
-  const testQueryClient = createTestQueryClient()
-  const { rerender, ...result } = render(
-    <QueryClientProvider client={testQueryClient}>{ui}</QueryClientProvider>
-  )
-  return {
-    ...result,
-    rerender: (rerenderUi: ReactElement) =>
-      rerender(
-        <QueryClientProvider client={testQueryClient}>
-          {rerenderUi}
-        </QueryClientProvider>
-      ),
-  }
 }

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { Pokedex } from '../pages/Pokedex'
-import { pikachu } from '../test-utils/mockPikachu'
+import { pikachu, pikachuFlavorText } from '../test-utils/mockPikachu'
 import { allPokemon } from '../test-utils/mockAllPokemon'
 
 const mockAllPokemon = { data: allPokemon.results }
@@ -17,11 +17,9 @@ jest.mock('../hooks/useGetPokemon', () => ({
   },
 }))
 
-const mockFlavorText =
-  'When several of these POKéMON gather, their electricity could build and cause lightning storms.'
 jest.mock('../hooks/useGetFlavorText', () => ({
   useGetFlavorText: () => {
-    return mockFlavorText
+    return pikachuFlavorText
   },
 }))
 

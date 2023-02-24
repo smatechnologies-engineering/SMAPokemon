@@ -4,10 +4,10 @@ import { Pokemon, FlavorText } from 'pokenode-ts'
 
 export function useGetFlavorText(pokemon: Pokemon | undefined) {
   return useQuery<string>(
-    ['flavor-test', pokemon?.name],
+    ['flavor-text', pokemon?.name],
     async () => {
       const response = await axios.get(pokemon?.species?.url as string)
-      const data = await response.data
+      const data = response.data
 
       const flavorText: FlavorText = data.flavor_text_entries.find(
         (t: FlavorText) => t.language.name === 'en'
