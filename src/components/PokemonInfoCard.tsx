@@ -6,13 +6,13 @@ import Typography from '@mui/material/Typography'
 import Chip, { ChipProps } from '@mui/material/Chip'
 import * as colors from '@mui/material/colors'
 import { styled } from '@mui/material/styles'
-import { FlavorText, Pokemon, PokemonType } from 'pokenode-ts'
+import { PokemonType } from 'pokenode-ts'
 import logo from '../assests/Pokemon-Logo-700x394.png'
-import { useQuery } from 'react-query'
+import { useGetPokemon } from '../hooks/useGetPokemon'
+import { useGetFlavorText } from '../hooks/useGetFlavorText'
 
 interface PokemonInfoCardProps {
   name: string
-  url: string
 }
 
 const obj: Record<string, $FixMe> = {
@@ -49,33 +49,10 @@ const ColoredChip = styled(Chip, {
 })
 
 export function PokemonInfoCard(props: PokemonInfoCardProps) {
-  const { name, url } = props
+  const { name } = props
 
-  const { data: pokemon } = useQuery<Pokemon>(
-    `pokemon-info-${name}`,
-    async () => {
-      const response = await fetch(url)
-      const data = await response.json()
-      return data
-    }
-  )
-
-  const { data: flavorText } = useQuery<string>(
-    `${name}-flavor-text`,
-    async () => {
-      const response = await fetch(pokemon?.species?.url as RequestInfo)
-      const data = await response.json()
-
-      const flavorText: FlavorText = data.flavor_text_entries.find(
-        (t: FlavorText) => t.language.name === 'en'
-      )
-
-      return flavorText.flavor_text
-    },
-    {
-      enabled: !!pokemon,
-    }
-  )
+  const { data: pokemon } = useGetPokemon(name)
+  const { data: flavorText } = useGetFlavorText(pokemon)
 
   const cardImageUrl =
     pokemon?.sprites?.other?.['official-artwork']['front_default'] ?? logo
@@ -101,7 +78,11 @@ export function PokemonInfoCard(props: PokemonInfoCardProps) {
         >
           {name?.charAt(0).toUpperCase() + name?.slice(1)}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          aria-label="pokemon-flavor-text"
+        >
           {flavorText}
         </Typography>
       </CardContent>

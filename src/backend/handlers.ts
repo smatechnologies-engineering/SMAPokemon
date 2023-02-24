@@ -3,6 +3,7 @@
 // as well as my development in the browser. Pretty sweet!
 import { rest } from 'msw' // msw supports graphql too!
 import pokemon from './pokemon.json'
+import { pikachu } from '../test-utils/mockPikachu'
 
 export const handlers = [
   // Provide request handlers
@@ -14,7 +15,10 @@ export const handlers = [
       })
     )
   }),
-  rest.get('https://pokeapi.co/api/v2/pokemon', async (req, res, ctx) => {
+  rest.get('https://pokeapi.co/api/v2/pokemon', (req, res, ctx) => {
     return res(ctx.json(pokemon))
+  }),
+  rest.get('https://pokeapi.co/api/v2/pokemon/pikachu', (req, res, ctx) => {
+    return res(ctx.json(pikachu))
   }),
 ]

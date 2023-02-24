@@ -7,7 +7,10 @@ import { memo } from 'react'
 
 function PokemonNotFound() {
   return (
-    <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
+    <Card
+      sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}
+      aria-label="pokemon-not-found"
+    >
       <CardMedia
         component="img"
         alt={'Pokemon not found'}
