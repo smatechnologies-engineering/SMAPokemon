@@ -1,5 +1,5 @@
 import { AppBar, Tab, Tabs, Toolbar } from '@mui/material'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import PokemonLogo from '../assests/Pokemon-Logo-700x394.png'
 import '../App.css'
 import { useState } from 'react'
@@ -34,7 +34,10 @@ type TabIndexMap = {
 }
 
 export function NavBar() {
-  const [tabIndex, setTabIndex] = useState(0)
+  const location = useLocation()
+  const [tabIndex, setTabIndex] = useState(
+    location.pathname.includes('pokedex') ? 1 : 0
+  )
   const tabIndexToRoute: TabIndexMap = {
     0: '/',
     1: '/pokedex',
