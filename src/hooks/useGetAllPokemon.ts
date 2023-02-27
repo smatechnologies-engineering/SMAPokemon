@@ -1,12 +1,22 @@
 import axios from 'axios'
-import { useQuery } from 'react-query'
-import { NamedAPIResource, NamedAPIResourceList } from 'pokenode-ts'
+import { useInfiniteQuery } from 'react-query'
+import { NamedAPIResourceList } from 'pokenode-ts'
 
 export function useGetAllPokemon() {
-  return useQuery<Array<NamedAPIResource>>(['all-pokemon'], async () => {
-    const response = await axios.get('https://pokeapi.co/api/v2/pokemon')
-    const data: NamedAPIResourceList = response.data
+  const url = 'https://pokeapi.co/api/v2/pokemon/'
 
-    return data.results
-  })
+  return useInfiniteQuery<NamedAPIResourceList>(
+    ['all-pokemon'],
+    async ({ pageParam = url }) => {
+      const response = await axios.get(pageParam)
+      const data: NamedAPIResourceList = response.data
+
+      return data
+    },
+    {
+      getNextPageParam: (lastPage) => {
+        return lastPage.next
+      },
+    }
+  )
 }

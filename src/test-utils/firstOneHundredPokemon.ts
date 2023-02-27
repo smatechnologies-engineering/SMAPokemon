@@ -1,4 +1,4 @@
-export const allPokemon = {
+export const firstOneHundredPokemon = {
   count: 1118,
   next: 'https://pokeapi.co/api/v2/pokemon?offset=100&limit=20',
   previous: null,
