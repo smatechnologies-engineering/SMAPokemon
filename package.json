@@ -17,7 +17,8 @@
     "coverage:merge": "istanbul-merge --out coverage/merged/coverage-final.json ./coverage/unit/coverage-final.json  ./coverage/e2e/coverage-final.json",
     "coverage:merge-report": "nyc report --reporter=lcov --reporter=text --temp-dir=./coverage/merged --report-dir=./coverage/merged",
     "coverage:report": "nyc report --check-coverage",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint:staged": "eslint --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.4.1",
