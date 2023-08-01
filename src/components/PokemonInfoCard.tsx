@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import Card from '@mui/material/Card'
+import type { CSSProperties } from 'react'
+import Card, { CardProps } from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
@@ -7,13 +7,18 @@ import Typography from '@mui/material/Typography'
 import Chip, { ChipProps } from '@mui/material/Chip'
 import * as colors from '@mui/material/colors'
 import { styled } from '@mui/material/styles'
+import type { PokemonType } from 'pokenode-ts'
+import { useGetPokemon } from '../hooks/useGetPokemon'
+import { useGetFlavorText } from '../hooks/useGetFlavorText'
 
-interface PokemonProp {
+import pokeball from '../assets/pokeball.png'
+
+interface PokemonInfoCardProps extends CardProps {
   name: string
-  url: string
 }
 
-const obj: Record<string, $FixMe> = {
+type ChipColor = Exclude<CSSProperties['backgroundColor'], undefined>
+const obj: Record<string, ChipColor> = {
   fire: colors.red[500],
   grass: colors.lime[500],
   electric: colors.yellow[500],
@@ -33,75 +38,50 @@ const obj: Record<string, $FixMe> = {
 }
 
 interface ColoredChipProps extends ChipProps {
-  eltype: $FixMe
+  eltype: keyof typeof obj
 }
 
 const ColoredChip = styled(Chip, {
   shouldForwardProp: (prop) => prop !== 'eltype',
 })<ColoredChipProps>(({ eltype, theme }) => {
-  const color: $FixMe = obj[eltype] || obj.normal
+  const color: ChipColor = obj[eltype] || obj.normal
   return {
     color: theme.palette.getContrastText(color),
     backgroundColor: color,
   }
 })
 
-interface Pokemon {
-  types: $FixMe
-  sprites: $FixMe
-  species: $FixMe
-}
+const capitalize = (str: string) =>
+  str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : ''
 
-export function PokemonInfoCard(props: { pokemon: PokemonProp }) {
-  const {
-    pokemon: { name, url },
-  } = props
-  const [pokemon, setPokemon] = useState<Pokemon>({} as Pokemon)
-  const [details, setDetails] = useState({
-    flavor_text: "This pokemons' flavor text.",
-  })
-  const flavorTextUrl = pokemon.species?.url
+export function PokemonInfoCard(props: PokemonInfoCardProps) {
+  const { name, ...rest } = props
 
-  useEffect(() => {
-    ;(async function getData() {
-      const response = await fetch(url)
-      const data = await response.json()
-      setPokemon(data)
-    })()
-  }, [url])
+  const { data: pokemon } = useGetPokemon(name)
+  const { data: flavorText } = useGetFlavorText(pokemon)
 
-  useEffect(() => {
-    ;(async function getText() {
-      const response = await fetch(flavorTextUrl)
-      const data = await response.json()
-
-      setDetails(
-        data['flavor_text_entries'].find(
-          (t: $FixMe) => t.language.name === 'en'
-        )
-      )
-    })()
-  }, [flavorTextUrl])
+  const cardImageUrl =
+    pokemon?.sprites?.other?.['official-artwork']?.front_default ?? pokeball
 
   return (
-    <Card sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
+    <Card {...rest} sx={{ maxWidth: 345, minWidth: 240, padding: 4 }} data-testid="pokemon-info-container">
       <CardMedia
         component="img"
         alt={name}
         height="140"
         style={{ objectFit: 'contain' }}
-        image={pokemon?.sprites?.other['official-artwork']['front_default']}
+        image={cardImageUrl}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {name.charAt(0).toUpperCase() + name.slice(1)}
+        <Typography gutterBottom variant="h5">
+          {capitalize(name)}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {details.flavor_text}
+        <Typography variant="body2" color="text.secondary" width={240}>
+          {flavorText}
         </Typography>
       </CardContent>
       <CardActions>
-        {pokemon?.types?.map((t: $FixMe) => (
+        {pokemon?.types?.map((t: PokemonType) => (
           <ColoredChip
             label={t.type.name}
             key={t.type.name}

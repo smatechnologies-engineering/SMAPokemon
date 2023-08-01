@@ -1,55 +1,60 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Container from '@mui/material/Container'
 import { PokemonInfoCard } from '../components/PokemonInfoCard'
+import PokemonNotFound from '../components/PokemonNotFound'
+import { useDebounce } from '../hooks/useDebounce'
+import { useGetPokemon } from '../hooks/useGetPokemon'
 
 export function PokemonSearch() {
   const [val, setVal] = useState('')
   const [pokemonFound, setPokemonFound] = useState(false)
-  const [pokemon, setPokemon] = useState()
-  const handleChange = (e: $FixMe) => {
+  const debouncedSearchStr = useDebounce(val.toLowerCase(), 200)
+
+  const { data: pokemonData } = useGetPokemon(debouncedSearchStr)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVal(e.target.value)
   }
-
-  const url = `https://pokeapi.co/api/v2/pokemon/${val}/`
-
   useEffect(() => {
-    ;(async () => {
-      try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${val}/`
-        )
-        const data = await response.json()
-        setPokemon(data)
-        setPokemonFound(true)
-      } catch (e) {
-        console.error(e)
-      }
-    })()
-  }, [val])
+    if (pokemonData) {
+      setPokemonFound(true)
+    } else {
+      setPokemonFound(false)
+    }
+  }, [pokemonData])
 
   return (
     <Container
       style={{ paddingBottom: 24, paddingTop: 24, textAlign: 'center' }}
       maxWidth={'lg'}
     >
-      <Grid container spacing={{ xs: 4 }} columns={{ xs: 4 }}>
+      <Grid
+        container
+        spacing={{ xs: 4 }}
+        columns={{ xs: 4 }}
+        direction="column"
+        alignItems="center"
+      >
         <Grid item xs={4} sm={4} md={4}>
           <Typography variant="h2">Find your Pokemon</Typography>
         </Grid>
 
-        {pokemonFound ? (
+        {pokemonData && (
           <Grid item xs={4} sm={4} md={4}>
-            <PokemonInfoCard pokemon={{ name: val, url }} />
+            <PokemonInfoCard name={pokemonData?.name ?? ''} />
           </Grid>
-        ) : null}
+        )}
+        {!pokemonFound && val !== '' && <PokemonNotFound />}
         <Grid item xs={4} sm={4} md={4}>
           <TextField
             variant="outlined"
             color="secondary"
-            label="search pokemon"
+            label="Search pokemon"
+            data-testid="pokemon-search"
+            aria-labelledby="pokemon-search-label"
             onChange={handleChange}
           />
         </Grid>

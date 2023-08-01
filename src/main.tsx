@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import CssBaseline from '@mui/material/CssBaseline'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+
+import './index.css'
+import App from './App'
 import { worker } from './backend/browser'
 
 const theme = createTheme()
@@ -14,13 +16,17 @@ async function prepare() {
   }
 }
 
+const queryClient = new QueryClient()
+
 prepare().then(() => {
   ReactDOM.render(
     <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </QueryClientProvider>
     </React.StrictMode>,
     document.getElementById('root')
   )
