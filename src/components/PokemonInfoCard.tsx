@@ -71,6 +71,7 @@ export function PokemonInfoCard(props: PokemonInfoCardProps) {
         height="140"
         style={{ objectFit: 'contain' }}
         image={cardImageUrl}
+        loading="lazy"
       />
       <CardContent>
         <Typography gutterBottom variant="h5">
