@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
-import { CircularProgress, Container, Grid } from '@mui/material'
+import CircularProgress from '@mui/material/CircularProgress'
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
 import { PokemonInfoCard } from '../components/PokemonInfoCard'
 import { useGetAllPokemon } from '../hooks/useGetAllPokemon'
 

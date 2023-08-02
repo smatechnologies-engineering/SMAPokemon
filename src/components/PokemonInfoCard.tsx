@@ -10,7 +10,6 @@ import { styled } from '@mui/material/styles'
 import type { PokemonType } from 'pokenode-ts'
 import { useGetPokemon } from '../hooks/useGetPokemon'
 import { useGetFlavorText } from '../hooks/useGetFlavorText'
-
 import pokeball from '../assets/pokeball.png'
 
 interface PokemonInfoCardProps extends CardProps {
@@ -64,7 +63,7 @@ export function PokemonInfoCard(props: PokemonInfoCardProps) {
     pokemon?.sprites?.other?.['official-artwork']?.front_default ?? pokeball
 
   return (
-    <Card {...rest} sx={{ maxWidth: 345, minWidth: 240, padding: 4 }} data-testid="pokemon-info-container">
+    <Card {...rest} sx={{ maxWidth: 345, minWidth: 240, padding: 4 }}>
       <CardMedia
         component="img"
         alt={name}
